@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import Image from "next/image";
 import { Mail, MessageCircle } from "lucide-react";
 
 /* Inline brand SVG icons (lucide-react removed brand icons) */
@@ -52,9 +53,10 @@ export default function Footer() {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
-            className="text-2xl font-bold text-white tracking-tight"
+            className="flex items-center gap-3 text-2xl font-bold text-white tracking-tight"
           >
-            Tayyab.
+            <Image src="/logo.png" alt="TA Logo" width={32} height={32} className="rounded-md" />
+            Tayyab Arif
           </a>
 
           {/* Social icons */}

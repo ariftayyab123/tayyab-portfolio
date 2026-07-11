@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
@@ -45,8 +46,9 @@ export default function Navbar() {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
-          className="text-lg font-semibold text-[#111827] tracking-tight"
+          className="flex items-center gap-3 text-lg font-semibold text-[#111827] tracking-tight"
         >
+          <Image src="/logo.png" alt="TA Logo" width={32} height={32} className="rounded-md" />
           Tayyab Arif
         </a>
 
