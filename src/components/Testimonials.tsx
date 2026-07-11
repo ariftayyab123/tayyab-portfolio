@@ -13,6 +13,7 @@ const testimonials = [
     quote: "We needed a robust, SEO-optimized business website and Tayyab delivered beyond our expectations. His communication, architecture choices, and final delivery were truly production-grade.",
     author: "Founder",
     company: "Envway Technologies",
+    companyUrl: "https://www.linkedin.com/company/envway-technologies/?viewAsMember=true",
   }
 ];
 
@@ -55,7 +56,18 @@ export default function Testimonials() {
                 </div>
                 <div>
                   <h4 className="text-[#0A0A0A] font-bold">{testimonial.author}</h4>
-                  <p className="text-[#0A0A0A]/60 text-sm font-medium">{testimonial.company}</p>
+                  {testimonial.companyUrl ? (
+                    <a
+                      href={testimonial.companyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#0A0A0A]/60 text-sm font-medium hover:text-[#0A0A0A] transition-colors hover:underline decoration-[#FFD700] decoration-2 underline-offset-2"
+                    >
+                      {testimonial.company}
+                    </a>
+                  ) : (
+                    <p className="text-[#0A0A0A]/60 text-sm font-medium">{testimonial.company}</p>
+                  )}
                 </div>
               </div>
             </motion.div>
