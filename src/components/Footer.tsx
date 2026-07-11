@@ -83,7 +83,7 @@ export default function Footer() {
 
         {/* Bottom section */}
         <p className="text-center text-sm text-gray-400 font-medium">
-          © 2025 Tayyab Arif. Built with passion and purpose.
+          &copy; 2026 Tayyab Arif. Designed, built, and refined.
         </p>
       </div>
     </footer>
