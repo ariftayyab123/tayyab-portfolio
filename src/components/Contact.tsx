@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Send, Mail, MessageCircle, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { useForm, ValidationError } from "@formspree/react";
@@ -32,14 +32,43 @@ const formFields = [
 
 function FormspreeForm({ onReset }: { onReset: () => void }) {
   const [state, handleSubmit] = useForm("xkodwnad");
+  const [isSubmittedLocal, setIsSubmittedLocal] = useState(false);
 
-  if (state.succeeded) {
+  useEffect(() => {
+    // Check local storage on mount
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem("tayyab_form_submitted");
+      if (stored === "true") {
+        setIsSubmittedLocal(true);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    // If Formspree confirms success, save to local storage
+    if (state.succeeded) {
+      setIsSubmittedLocal(true);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("tayyab_form_submitted", "true");
+      }
+    }
+  }, [state.succeeded]);
+
+  const handleReset = () => {
+    setIsSubmittedLocal(false);
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("tayyab_form_submitted");
+    }
+    onReset();
+  };
+
+  if (isSubmittedLocal || state.succeeded) {
     return (
       <div className="flex flex-col items-center justify-center text-center p-12 border-2 border-[#0A0A0A] bg-[#FFD700] rounded-xl h-full shadow-[4px_4px_0_0_#0A0A0A]">
         <CheckCircle2 className="w-12 h-12 text-[#0A0A0A] mb-4" />
         <h3 className="text-2xl font-bold text-[#0A0A0A] tracking-tight mb-2">Message Sent!</h3>
         <p className="text-[#0A0A0A]/80 font-medium mb-6">Thank you for reaching out. I'll get back to you shortly.</p>
-        <button onClick={onReset} type="button" className="btn-primary !bg-white !text-[#0A0A0A] hover:!bg-white/90">
+        <button onClick={handleReset} type="button" className="btn-primary !bg-white !text-[#0A0A0A] hover:!bg-white/90" suppressHydrationWarning>
           Send another message
         </button>
       </div>
