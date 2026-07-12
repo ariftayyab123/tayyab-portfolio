@@ -52,13 +52,6 @@ export default function Hero() {
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </a>
-            <a
-              href="/resume.pdf"
-              download
-              className="text-[#0A0A0A]/70 hover:text-[#0A0A0A] font-semibold text-[15px] transition-colors border-b-2 border-current/40 hover:border-current pb-[2px]"
-            >
-              Download resume
-            </a>
           </motion.div>
         </div>
       </div>

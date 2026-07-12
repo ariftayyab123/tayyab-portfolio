@@ -76,7 +76,13 @@ function FormspreeForm({ onReset }: { onReset: () => void }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5" suppressHydrationWarning>
+    <form 
+      onSubmit={handleSubmit} 
+      action="https://formspree.io/f/xkodwnad" 
+      method="POST" 
+      className="space-y-5" 
+      suppressHydrationWarning
+    >
       {formFields.map((field) => (
         <div key={field.id}>
           <label
