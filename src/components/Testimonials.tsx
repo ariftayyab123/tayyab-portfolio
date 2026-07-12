@@ -5,7 +5,7 @@ import { Quote } from "lucide-react";
 
 const testimonials = [
   {
-    quote: "Tayyab completely transformed our operations. The warehouse QC system he built is flawless, and his focus on actual business logic rather than just writing code saved us months of headaches. Highly recommended.",
+    quote: "Tayyab helped us improve our warehouse QC and labelling workflow by building a system around our real operational needs. He understood the scanning, verification, and printing process well, and delivered a practical solution that made the work easier for our team.",
     author: "Operations Director",
     company: "Warehouse & Logistics Client",
   },
