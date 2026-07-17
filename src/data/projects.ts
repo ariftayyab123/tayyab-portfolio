@@ -46,21 +46,20 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/ariftayyab123/qc-app",
   },
   {
-    id: "bmj-warehouse",
-    title: "BMJ Warehouse Labelling System",
+    id: "warehouse-ops",
+    title: "Warehouse Operations System (Europe)",
     description:
-      "A full-stack warehouse Quality Check and labelling system designed to manage barcode scanning, box verification, and industrial label printing workflows. It includes role-based access control, real-time scan handling, SKU validation, and a visual label template editor with ZPL code generation for thermal printers.",
+      "Full-stack warehouse operations platform with intuitive scan-based workflows, real-time verification, SKU validation, and a visual label template editor with ZPL generation for industrial thermal printers. Includes role-based access and hardware control modules for on-site workstations.",
     problem:
       "Manual warehouse QC processes were slow and error-prone. Required a system for anomaly detection, checklists, and dynamic label generation directly from the browser.",
     tech: ["React 18", "TypeScript", "Supabase", "Deno Edge Functions", "Zustand/Query"],
     image: "/images/mockup-warehouse.png",
     highlights: [
-      "Serverless architecture (Deno)",
+      "Scan-based verification workflows",
       "Visual ZPL label editor",
-      "GS1 barcode normalization",
+      "Hardware control modules",
       "Multi-tenant device identity",
     ],
-    liveUrl: "http://192.168.18.92:8081/",
   },
   {
     id: "envway",

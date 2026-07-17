@@ -18,9 +18,9 @@ const services = [
   },
   {
     icon: BarChart3,
-    title: "Business Systems",
+    title: "Operations Tools",
     description:
-      "End-to-end operational systems including warehouse Quality Check platforms, print gateway agents, data export modules, barcode workflows, dashboards, and deployment-ready tools for real-world business operations.",
+      "End-to-end operational systems including warehouse Quality Check platforms, print gateway agents, data export modules, intuitive scan-based workflows, hardware control modules, and deployment-ready tools for real-world operations.",
   },
 ];
 

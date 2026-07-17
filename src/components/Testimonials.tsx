@@ -7,7 +7,7 @@ const testimonials = [
   {
     quote: "Tayyab helped us improve our warehouse QC and labelling workflow by building a system around our real operational needs. He understood the scanning, verification, and printing process well, and delivered a practical solution that made the work easier for our team.",
     author: "Operations Director",
-    company: "Warehouse & Logistics Client",
+    company: "Warehouse Operations Client (Europe)",
   },
   {
     quote: "We needed a robust, SEO-optimized business website and Tayyab delivered beyond our expectations. His communication, architecture choices, and final delivery were truly production-grade.",
