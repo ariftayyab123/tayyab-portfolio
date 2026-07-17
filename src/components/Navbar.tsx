@@ -3,12 +3,13 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Work", href: "#projects" },
-  { label: "About", href: "#about" },
-  { label: "Stack", href: "#stack" },
+  { label: "Experience", href: "#experience" },
+  { label: "Capabilities", href: "#capabilities" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -22,10 +23,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleLinkClick = (href: string) => {
-    setMobileOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
-  };
+  // We rely on Next.js <Link> and native smooth scrolling defined in globals.css
 
   return (
     <motion.header
@@ -34,57 +32,60 @@ export default function Navbar() {
       transition={{ duration: 0.4 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "border-b border-[#E5E7EB] backdrop-blur-md"
+          ? "border-b border-[#0A0A0A]/10 backdrop-blur-md"
           : "border-b border-transparent"
       }`}
       style={{ backgroundColor: scrolled ? "rgba(250, 247, 240, 0.85)" : "transparent" }}
     >
       <nav className="section-container flex items-center justify-between py-4">
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }}
-          className="flex items-center gap-3 text-lg font-semibold text-[#111827] tracking-tight"
+        {/* Brand Logo */}
+        <Link
+          href="/"
+          className="flex items-center gap-3 text-lg font-bold text-[#0A0A0A] tracking-tight"
         >
-          <Image src="/logo.png" alt="TA Logo" width={32} height={32} className="rounded-md" />
+          <Image src="/logo.png" alt="TA Logo" width={32} height={32} className="rounded-md border border-[#0A0A0A]/20" />
           Tayyab Arif
-        </a>
+        </Link>
 
-        {/* Desktop */}
+        {/* Desktop Navigation */}
         <ul className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <li key={link.href}>
-              <a
-                href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleLinkClick(link.href);
-                }}
-                className="text-sm font-[450] text-[#111827]/50 hover:text-[#111827] transition-colors"
+              <Link
+                href={`/${link.href}`}
+                className="text-sm font-semibold text-[#0A0A0A]/60 hover:text-[#0A0A0A] transition-colors"
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
+          
+          {/* Resume link */}
+          <li>
+            <a
+              href="/resume.pdf"
+              download
+              className="text-xs uppercase tracking-widest text-[#0A0A0A]/60 hover:text-[#0A0A0A] font-bold transition-colors"
+            >
+              Resume
+            </a>
+          </li>
+
+          {/* Connect Button */}
           <li>
             <a
               href="mailto:ariftayyab2002@gmail.com"
-              className="inline-flex items-center gap-1.5 bg-[#111827] text-white text-sm font-medium px-4 py-2 rounded-full hover:bg-neutral-800 transition-colors"
+              className="inline-flex items-center gap-1.5 bg-[#0A0A0A] text-white text-xs uppercase tracking-wider font-bold px-5 py-2.5 rounded-full hover:bg-neutral-800 transition-colors shadow-[2px_2px_0_0_rgba(10,10,10,0.15)]"
             >
               Get in touch
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
             </a>
           </li>
         </ul>
 
-        {/* Mobile toggle */}
+        {/* Mobile menu toggle */}
         <button
           onClick={() => setMobileOpen((p) => !p)}
-          className="md:hidden flex items-center justify-center w-10 h-10 rounded-full text-[#111827]"
+          className="md:hidden flex items-center justify-center w-11 h-11 rounded-full border-2 border-[#0A0A0A] text-[#0A0A0A] bg-white shadow-[2px_2px_0_0_#0A0A0A]"
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
         >
           {mobileOpen ? <X size={20} /> : <Menu size={20} />}
@@ -99,25 +100,31 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="overflow-hidden md:hidden border-t border-[#E5E7EB] bg-[#FAF7F0]"
+            className="overflow-hidden md:hidden border-t border-[#0A0A0A]/10 bg-[#FAF7F0]"
           >
             <div className="section-container flex flex-col gap-1 py-4">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.href}
-                  href={link.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleLinkClick(link.href);
-                  }}
-                  className="block rounded-lg px-4 py-3 text-sm font-[450] text-[#111827]/70 hover:text-[#111827] hover:bg-white/60 transition-colors"
+                  href={`/${link.href}`}
+                  onClick={() => setMobileOpen(false)}
+                  className="block rounded-lg px-4 py-3 text-sm font-semibold text-[#0A0A0A]/70 hover:text-[#0A0A0A] hover:bg-white/60 transition-colors"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
+              
+              <a
+                href="/resume.pdf"
+                download
+                className="block rounded-lg px-4 py-3 text-sm font-semibold text-[#0A0A0A]/70 hover:text-[#0A0A0A] hover:bg-white/60 transition-colors"
+              >
+                Download Résumé
+              </a>
+
               <a
                 href="mailto:ariftayyab2002@gmail.com"
-                className="mt-2 inline-flex items-center justify-center gap-1.5 bg-[#111827] text-white text-sm font-medium px-4 py-3 rounded-full"
+                className="mt-2 inline-flex items-center justify-center gap-1.5 bg-[#0A0A0A] text-white text-xs uppercase tracking-wider font-bold px-4 py-3 rounded-full"
               >
                 Get in touch
               </a>

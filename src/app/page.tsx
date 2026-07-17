@@ -1,12 +1,11 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import WhatIDo from "@/components/WhatIDo";
 import Projects from "@/components/Projects";
-import TechStack from "@/components/TechStack";
-import WorkProcess from "@/components/WorkProcess";
-import Journey from "@/components/Journey";
-import Contact from "@/components/Contact";
+import Experience from "@/components/Experience";
 import Testimonials from "@/components/Testimonials";
+import CoreCapabilities from "@/components/CoreCapabilities";
+import TechStack from "@/components/TechStack";
+import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -15,12 +14,11 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <WhatIDo />
         <Projects />
+        <Experience />
         <Testimonials />
+        <CoreCapabilities />
         <TechStack />
-        <WorkProcess />
-        <Journey />
         <Contact />
       </main>
       <Footer />

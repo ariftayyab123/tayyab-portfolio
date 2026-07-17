@@ -1,82 +1,118 @@
 export interface Project {
   id: string;
   title: string;
-  description: string;
-  problem: string;
-  tech: string[];
-  image: string;
-  highlights: string[];
+  shortDescription: string;
+  contributions: string[];
+  techLabels: string[];
+  image: string; // Featured image
+  screenshots: string[]; // Slideshow / Gallery screenshots
   liveUrl?: string;
   githubUrl?: string;
+  confidential?: boolean;
+  type: "case-study" | "client-project";
+  flowSteps?: { step: string; description: string }[];
+  label?: string; // e.g. "Company Project - Internet Research Bureau"
 }
 
 export const projects: Project[] = [
   {
     id: "capacity",
-    title: "Capacity Survey Programming Tool",
-    description:
-      "A full-stack survey programming platform built for creating complex research surveys. It supports conditional branching, looping, validations, and 70+ question types through a visual and code-based logic interface. The frontend is built with TypeScript, while the backend uses Spring Boot microservices, MySQL, Redis, Resilience4j, Docker, and Kubernetes.",
-    problem:
-      "Off-the-shelf tools can't express real market-research logic. Needed a way to render unlimited, arbitrary surveys with complex conditional logic, loops, and auto-filled answers without redeploying code.",
-    tech: ["TypeScript", "Spring Boot", "MySQL", "Resilience4j", "Redis", "Docker", "Kubernetes"],
-    image: "/images/mockup-survey.png",
-    highlights: [
-      "Custom logic DSL & parser",
-      "Spring Boot microservices",
-      "Resilience4j & Redis",
-      "Kubernetes deployment",
+    title: "Capacity Survey Programming Platform",
+    label: "Company Project - Internet Research Bureau",
+    shortDescription: "Contributed to a survey-authoring platform used to configure complex research surveys, conditional logic, scripting, and respondent workflows.",
+    contributions: [
+      "Built and maintained survey-authoring interfaces using React and Next.js",
+      "Developed workflows for question configuration, validation, and branching",
+      "Integrated frontend modules with Spring Boot APIs",
+      "Built dashboard views for monitoring survey completion and drop-offs"
+    ],
+    techLabels: ["Next.js", "React", "TypeScript", "Spring Boot", "MySQL", "Redis"],
+    image: "/images/capacity-listing.png",
+    screenshots: [
+      "/images/capacity-listing.png",
+      "/images/capacity-authoring.png",
+      "/images/capacity-scripting.png",
+      "/images/capacity-stats.png",
+      "/images/capacity-incompletes.png",
+      "/images/capacity-respondent.png"
     ],
     liveUrl: "https://beta.the-capacity.com/",
-  },
-  {
-    id: "qc-print-agent",
-    title: "Print Agent — Warehouse Label System",
-    description:
-      "An on-premise Python print service built for warehouse workstations. It polls a centralized print queue, retrieves label jobs, and forwards ZPL commands to local thermal printers over raw TCP. The agent includes network-resilient job handling, secure credential storage through the OS keychain, and a zero-touch installer for easy workstation setup.",
-    problem:
-      "Needed to bridge a secure cloud platform (Supabase) with on-premise Zebra printers on isolated networks, without exposing database credentials or using VPNs.",
-    tech: ["Python", "TCP Sockets", "Supabase Edge Functions", "PyInstaller"],
-    image: "/images/mockup-print.png",
-    highlights: [
-      "Parallel multi-printer support",
-      "Self-healing network recovery",
-      "OS keychain security",
-      "Scaled throughput 3x",
-    ],
-    githubUrl: "https://github.com/ariftayyab123/qc-app",
+    confidential: true,
+    type: "case-study",
+    flowSteps: [
+      { step: "Survey Authoring", description: "Visual and code-based interfaces for defining survey content and custom DSL variables." },
+      { step: "Custom Scripting", description: "Providing secure environments for running custom scripts directly inside the authoring workflow." },
+      { step: "Conditional Logic", description: "Applying conditional branching, looping, and Skip logic rules based on previous responses." },
+      { step: "Real-time Stats", description: "Tracking real-time survey statistics, showing drop-offs and incomplete metrics question by question." },
+      { step: "Runtime Rendering", description: "Rendering the survey to respondents with optimized performance and zero layout shifts." },
+      { step: "Data Storage", description: "Persisting responses using Spring Boot microservices into MySQL, with Redis caching." }
+    ]
   },
   {
     id: "warehouse-ops",
-    title: "Warehouse Operations System (Europe)",
-    description:
-      "Full-stack warehouse operations platform with intuitive scan-based workflows, real-time verification, SKU validation, and a visual label template editor with ZPL generation for industrial thermal printers. Includes role-based access and hardware control modules for on-site workstations.",
-    problem:
-      "Manual warehouse QC processes were slow and error-prone. Required a system for anomaly detection, checklists, and dynamic label generation directly from the browser.",
-    tech: ["React 18", "TypeScript", "Supabase", "Deno Edge Functions", "Zustand/Query"],
-    image: "/images/mockup-warehouse.png",
-    highlights: [
-      "Scan-based verification workflows",
-      "Visual ZPL label editor",
-      "Hardware control modules",
-      "Multi-tenant device identity",
+    title: "Warehouse Operations and Labelling System",
+    label: "Independent Client Project - Warehouse and Logistics",
+    shortDescription: "Built operational workflows for scanning items, validating SKUs, managing boxes, and printing ZPL labels in a physical warehouse.",
+    contributions: [
+      "Created barcode-based shipment verification workflows",
+      "Implemented workstation-specific box assignment rules",
+      "Generated configurable ZPL labels from the web application",
+      "Integrated local printing and warehouse event workflows"
     ],
+    techLabels: ["React", "TypeScript", "Supabase", "PostgreSQL", "ZPL", "WebSockets"],
+    image: "/images/warehouse-listing.png",
+    screenshots: [
+      "/images/warehouse-listing.png",
+      "/images/warehouse-detail.png",
+      "/images/warehouse-edit.png",
+      "/images/warehouse-printers.png",
+      "/images/warehouse-station.png"
+    ],
+    confidential: true,
+    type: "case-study",
+    flowSteps: [
+      { step: "Barcode Scan", description: "Operator scans items at the workstation using barcode readers connected to the web interface." },
+      { step: "SKU Verification", description: "Server-side verification of SKU and category validity against database records." },
+      { step: "Box Assignment", description: "Associating verified items with active operational boxes/shipments." },
+      { step: "Quality Control", description: "Flagging anomalies (shortages, damages) and logging them into the database." },
+      { step: "Label Generation", description: "Rendering custom ZPL codes based on verified invoice and item specifications." },
+      { step: "Print Queue", description: "Pushing the print job to a centralized queue in Supabase for hardware execution." },
+      { step: "Thermal Printer", description: "Delivered to local Zebra printers over raw TCP via the Print Agent." }
+    ]
+  },
+  {
+    id: "print-agent",
+    title: "Print Agent — Warehouse Label System",
+    shortDescription: "A Python service that runs on warehouse computers to pull cloud print jobs and send them to local thermal printers.",
+    contributions: [
+      "Built raw TCP communication scripts to send ZPL code to local Zebra printers",
+      "Wrote polling logic to fetch pending print jobs from a Supabase database",
+      "Stored database credentials locally using the operating-system keychain",
+      "Created a web-based pairing interface to register workstations without manual configuration"
+    ],
+    techLabels: ["Python", "TCP Sockets", "ZPL", "Supabase Edge Functions"],
+    image: "/images/print-agent-setup.png",
+    screenshots: [
+      "/images/print-agent-setup.png",
+      "/images/print-agent-pairing.png"
+    ],
+    githubUrl: "https://github.com/ariftayyab123/qc-app",
+    type: "case-study"
   },
   {
     id: "envway",
     title: "Envway Technologies Website",
-    description:
-      "Built a multi-page corporate website from scratch for a solar energy and water treatment solutions company. Features 10+ dynamic routes, a custom theming architecture, and highly optimized performance.",
-    problem:
-      "The business needed a professional, high-performance web presence to showcase a complex catalog of 20+ service offerings and their project portfolio.",
-    tech: ["React 19", "TypeScript", "Vite", "Tailwind CSS v4", "React Router v7"],
-    image: "/images/mockup-envway.png",
-    highlights: [
-      "Lazy-loaded routing",
-      "Custom design system",
-      "Optimized images (18MB to 47KB)",
-      "Formspree integration",
+    shortDescription: "A corporate website for a solar energy and water treatment company built during a short freelance contract.",
+    contributions: [
+      "Built a multi-page static website using React and Vite",
+      "Connected the contact form to Formspree to route emails directly to the founders",
+      "Configured the custom domain and deployed the site on Vercel"
     ],
+    techLabels: ["React", "TypeScript", "Vite", "Vercel", "Formspree"],
+    image: "/images/mockup-envway.png",
+    screenshots: ["/images/mockup-envway.png"],
     liveUrl: "https://www.envwaytechnologies.in/",
     githubUrl: "https://github.com/ariftayyab123/WaterManagementPublishingWebsite",
-  },
+    type: "client-project"
+  }
 ];
